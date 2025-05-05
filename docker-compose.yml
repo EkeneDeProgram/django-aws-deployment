@@ -1,0 +1,50 @@
+# Use Docker Compose file format version 3.8 (compatible with most modern Docker setups)
+version: '3.8'
+
+services:
+  # Django web service
+  web:
+    build: .  # Build the Docker image using the Dockerfile in the current directory
+    command: gunicorn microservice.wsgi:application --bind 0.0.0.0:8000
+    # Use Gunicorn to run the Django app, binding it to all interfaces on port 8000
+    volumes:
+      - .:/app  # Mount the current directory to /app in the container for live code updates
+    ports:
+      - "8000:8000"  # Expose container's port 8000 to the host's port 8000
+    env_file:
+      - .env  # Load environment variables from .env.example file
+    depends_on:
+      - db     # Ensure the 'db' service starts before this one
+      - redis  # Ensure the 'redis' service starts before this one
+
+  # PostgreSQL database service
+  db:
+    image: postgres:14  # Use the official PostgreSQL version 13 image
+    environment:
+      POSTGRES_DB: postgres         # Name of the default database
+      POSTGRES_USER: postgres       # Username for the DB
+      POSTGRES_PASSWORD: postgres   # Password for the DB user
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  
+      # Persist database data in a Docker-managed volume
+
+  # Redis service for caching and message brokering
+  redis:
+    image: redis:6  # Use official Redis version 6 image
+
+  # Celery worker service for background task processing
+  celery:
+    build: .  # Use the same image as the web service
+    command: celery -A microservice worker -l info  
+    # Start a Celery worker using your Django project ('microservice') and log at 'info' level
+    volumes:
+      - .:/app  # Mount current directory to enable access to app code
+    env_file:
+      - .env  # Load environment variables
+    depends_on:
+      - redis  # Wait until Redis is ready (used as Celery broker)
+      - db     # Wait until PostgreSQL is ready (if tasks use DB)
+
+# Define named volumes for persistent storage
+volumes:
+  postgres_data:  # This volume stores the data for the PostgreSQL service

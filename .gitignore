@@ -1,0 +1,22 @@
+# Ignore Python bytecode files
+__pycache__
+*.pyc
+*.pyo
+
+# Ignore virtual environments
+venv/
+env/
+.env
+
+# Ignore IDE/editor specific files
+.vscode/
+.idea/
+
+# Ignore log files
+*.log
+
+# Ignore the static directory (if it's not built into the image during a specific step)
+static/
+
+# Ignore media directory (if not required to be included in the image)
+media/
