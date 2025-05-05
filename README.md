@@ -28,7 +28,7 @@ This project is a Django-based microservice application that uses Docker for con
 
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/microservice.git
+   git clone https://github.com/EkeneDeProgram/django-aws-deployment.git
    cd microservice
 
 2. **Create a .env file for environment variables**:
