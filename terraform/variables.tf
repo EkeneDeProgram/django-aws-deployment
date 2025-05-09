@@ -1,23 +1,28 @@
-variable "aws_region" {
-  description = "The AWS region to deploy the infrastructure"
+variable "AWS_ACCESS_KEY_ID" {
+  description = "AWS Access Key ID"
   type        = string
-  default     = "us-east-1"
+  sensitive   = true
 }
 
-variable "vpc_cidr" {
-  description = "The CIDR block for the VPC"
+variable "AWS_SECRET_ACCESS_KEY" {
+  description = "AWS Secret Access Key"
   type        = string
-  default     = "10.0.0.0/16"
+  sensitive   = true
 }
 
-variable "subnet_1_cidr" {
-  description = "The CIDR block for Subnet 1"
+variable "AWS_DEFAULT_REGION" {
+  description = "The AWS region"
   type        = string
-  default     = "10.0.1.0/24"
 }
 
-variable "subnet_2_cidr" {
-  description = "The CIDR block for Subnet 2"
+variable "KEY_NAME" {
+  description = "The SSH key name for EC2"
   type        = string
-  default     = "10.0.2.0/24"
 }
+
+variable "AWS_DB_PASSWORD" {
+  description = "The database password"
+  type        = string
+  sensitive   = true
+}
+
