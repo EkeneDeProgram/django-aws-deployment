@@ -10,3 +10,4 @@ ExecStart=/home/ec2-user/env/bin/gunicorn --access-logfile - --workers 3 --bind 
 
 [Install]
 WantedBy=multi-user.target
+
