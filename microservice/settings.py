@@ -16,8 +16,8 @@ from .config import *    # Import everything from config.py
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = SECRET_KEY                            # Secret key for Django security
-DEBUG = DEBUG                                      # Enable/disable debug mode
-ALLOWED_HOSTS = ALLOWED_HOSTS                      # Allowed domains list
+DEBUG = False
+ALLOWED_HOSTS = ['44.205.251.73', 'localhost'] 
 
 
 # Quick-start development settings - unsuitable for production
@@ -158,11 +158,11 @@ WSGI_APPLICATION = 'microservice.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': DATABASE_NAME,                 # Database name from .env
-        'USER': DATABASE_USER,                 # Database username from .env
-        'PASSWORD': DATABASE_PASSWORD,         # Database password from .env
-        'HOST': DATABASE_HOST,                 # Database host from .env
-        'PORT': DATABASE_PORT,                  # Database port from .env, cast to integer
+        'NAME': AWS_DB_NAME,                 # Database name from .env
+        'USER': AWS_DB_USER,                 # Database username from .env
+        'PASSWORD': AWS_DB_PASSWORD,         # Database password from .env
+        'HOST': AWS_DB_HOST,                 # Database host from .env
+        'PORT': AWS_DB_PORT,                  # Database port from .env
     }
 }
 
@@ -202,7 +202,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+STATIC_ROOT = "/home/ec2-user/django-app/static/"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
