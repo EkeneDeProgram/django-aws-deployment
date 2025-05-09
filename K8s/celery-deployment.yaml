@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: celery
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: celery
+  template:
+    metadata:
+      labels:
+        app: celery
+    spec:
+      containers:
+        - name: celery
+          image: ekeneo1/microservice-celery:latest
+          command: ["celery", "-A", "microservice", "worker", "-l", "info"]
+          envFrom:
+            - secretRef:
+                name: microservice-secrets
