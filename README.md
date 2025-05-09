@@ -1,6 +1,6 @@
 # Microservice Project
 
-This project is a Django-based microservice application that uses Docker for containerization. It includes functionality for token-based authentication, background task processing using Celery, and integrates with PostgreSQL for database storage and Redis for caching and message brokering. The project also includes Swagger API documentation.
+This project is a Django-based microservice application that uses Docker for containerization. It includes functionality for token-based authentication, background task processing using Celery, and integrates with PostgreSQL for database storage and Redis for caching and message brokering. The project also includes Swagger API documentation using **drf-yasg**.
 
 ## Table of Contents
 
