@@ -20,3 +20,11 @@ static/
 
 # Ignore media directory (if not required to be included in the image)
 media/
+
+# Ignore Terraform state files
+*.tfvars
+*.tfstate
+*.tfstate.backup
+
+# Ignore Terraform provider binaries
+.terraform/
