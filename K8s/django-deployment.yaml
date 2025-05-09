@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: django
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: django
+  template:
+    metadata:
+      labels:
+        app: django
+    spec:
+      containers:
+        - name: django
+          image: ekeneo1/microservice-django:latest
+          ports:
+            - containerPort: 8000
+          env:
+            - name: DATABASE_HOST
+              value: "db"
+            - name: DATABASE_PORT
+              value: "5432"
+          envFrom:
+            - secretRef:
+                name: microservice-secrets
+          command: ["gunicorn", "microservice.wsgi:application", "--bind", "0.0.0.0:8000"]
