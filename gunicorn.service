@@ -5,7 +5,7 @@ After=network.target
 [Service]
 User=ec2-user
 Group=nginx
-WorkingDirectory=/home/ec2-user/django-app
+WorkingDirectory=/home/ec2-user/django-aws-deployment
 ExecStart=/home/ec2-user/env/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock myproject.wsgi:application
 
 [Install]
