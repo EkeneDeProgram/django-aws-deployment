@@ -19,8 +19,8 @@ jobs:
       - name: Deploy Django App
         run: |
           ssh -o StrictHostKeyChecking=no ec2-user@${{ secrets.EC2_PUBLIC_IP }} << 'EOF'
-            cd ~/django-app
-            git pull origin main
+            cd ~/django-aws-deployment
+            git pull origin master
             source env/bin/activate
             pip install -r requirements.txt
             python manage.py migrate
